@@ -1,5 +1,6 @@
 from sklearn.linear_model import LinearRegression
 
+
 class HousingModel:
     """
     Encapsulates a Linear Regression model
