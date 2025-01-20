@@ -27,7 +27,7 @@ jobs:
         pip install flake8 pytest
 
     - name: Lint code
-      run: flake8 src/
+      run: flake8 "M1_CICD Pipeline/src/"
 
     - name: Run tests
       run: pytest
