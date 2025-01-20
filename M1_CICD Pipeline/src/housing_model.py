@@ -1,6 +1,8 @@
+from sklearn.linear_model import LinearRegression
+
 class HousingModel:
     """
-    A class to encapsulate the Linear Regression model for housing price prediction.
+    Encapsulates a Linear Regression model
     """
 
     def __init__(self):
