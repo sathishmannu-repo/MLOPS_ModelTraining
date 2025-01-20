@@ -37,7 +37,7 @@ def test_housing_model():
     assert (
         predictions.shape == y_test.shape
     ), "Predictions shape does not match target shape."
-    # Further check that the model is indeed making predictions 
+    # Further check that the model is indeed making predictions
     # (that they are within a reasonable range)
     assert np.all(np.isfinite(predictions)), (
         "Predictions contain non-finite values."
