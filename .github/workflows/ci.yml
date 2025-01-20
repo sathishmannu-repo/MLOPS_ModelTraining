@@ -23,7 +23,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        pip install -r ../../M1_CICD Pipeline/requirements.txt
+        pip install -r "M1_CICD Pipeline/requirements.txt"
         pip install flake8 pytest
 
     - name: Lint code
