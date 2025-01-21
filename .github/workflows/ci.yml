@@ -62,16 +62,16 @@ jobs:
           echo "Model file already exists, skipping training."
         fi
 
-    - name: Deploy to AWS S3
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_REGION: us-east-1
+    - name: Commit and push the model file
       run: |
         model_file_path="M1_CICD Pipeline/model/housing_model.pkl"
         if [ -f "$model_file_path" ]; then
-          echo "Model file found, proceeding with deployment."
-          aws s3 cp "$model_file_path" s3://your-bucket-name/housing_model.pkl
+          echo "Model file found, committing to repository..."
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add "$model_file_path"
+          git commit -m "Add or update trained model"
+          git push origin development
         else
           echo "Model file not found. Deployment failed."
           exit 1
