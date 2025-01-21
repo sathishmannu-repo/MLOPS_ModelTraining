@@ -57,7 +57,7 @@ jobs:
         AWS_REGION: us-east-1
       run: |
         # Assuming you have a model file like 'housing_model.pkl' or an artifact to deploy
-        aws s3 cp "M1_CICD Pipeline/your_model_directory/housing_model.pkl" s3://your-bucket-name/housing_model.pkl
+        aws s3 cp "M1_CICD Pipeline/model/housing_model.pkl" s3://your-bucket-name/housing_model.pkl
 
     - name: Confirm Deployment
       run: echo "Deployment to S3 completed successfully."
