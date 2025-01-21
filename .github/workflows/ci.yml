@@ -68,7 +68,7 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_REGION: us-east-1
       run: |
-        model_file_path="model/housing_model.pkl"
+        model_file_path="M1_CICD Pipeline/model/housing_model.pkl"
         if [ -f "$model_file_path" ]; then
           echo "Model file found, proceeding with deployment."
           aws s3 cp "$model_file_path" s3://your-bucket-name/housing_model.pkl
