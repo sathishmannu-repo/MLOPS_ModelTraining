@@ -53,15 +53,15 @@ jobs:
       run: |
         # Ensure the models directory exists
         mkdir -p "model"
-  
+      
         # Check if the model file exists and save it
-        if [ ! -f "M1_CICD Pipeline/model/housing_model.pkl" ]; then
+        if [ ! -f "M1_CICD\ Pipeline/model/housing_model.pkl" ]; then
           echo "Model file not found, training model..."
-          python M1_CICD Pipeline/src/train_model.py
+          python "M1_CICD Pipeline/src/train_model.py"
         else
           echo "Model file already exists, skipping training."
         fi
-  
+
     - name: Deploy to AWS S3
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
