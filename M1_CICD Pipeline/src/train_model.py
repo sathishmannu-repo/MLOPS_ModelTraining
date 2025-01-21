@@ -39,3 +39,8 @@ print(f"Mean Squared Error (MSE): {mse:.2f}")
 print(f"Mean Absolute Error (MAE): {mae:.2f}")
 print(f"Root Mean Squared Error (RMSE): {rmse:.2f}")
 print(f"R² (Coefficient of Determination): {r2:.2f}")
+
+# Save the trained model to a file
+model_file = 'housing_model.pkl'
+joblib.dump(model.model, model_file)
+print(f"Model saved to {model_file}")
