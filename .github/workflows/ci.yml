@@ -31,3 +31,33 @@ jobs:
 
     - name: Run Tests
       run: pytest "M1_CICD Pipeline/tests/"
+
+  # Job for deployment
+  deploy:
+    runs-on: ubuntu-latest
+    needs: test  # Ensures deployment runs after tests pass
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.8
+
+    - name: Install dependencies
+      run: |
+        pip install -r "M1_CICD Pipeline/requirements.txt"
+
+    - name: Deploy to AWS S3
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_REGION: us-east-1
+      run: |
+        # Assuming you have a model file like 'housing_model.pkl' or an artifact to deploy
+        aws s3 cp "M1_CICD Pipeline/your_model_directory/housing_model.pkl" s3://your-bucket-name/housing_model.pkl
+
+    - name: Confirm Deployment
+      run: echo "Deployment to S3 completed successfully."
