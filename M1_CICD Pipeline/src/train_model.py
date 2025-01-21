@@ -7,7 +7,7 @@ from housing_model import HousingModel  # Make sure the path is correct
 
 
 # File path
-file_path = 'data/housing.csv'
+file_path = 'M1_CICD Pipeline/data/housing.csv'
 
 # Load the dataset
 data = pd.read_csv(file_path)
