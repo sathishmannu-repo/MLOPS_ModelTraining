@@ -7,6 +7,7 @@ app = Flask(__name__)
 # Load the saved model
 model = joblib.load('housing_model.pkl')
 
+
 @app.route('/predict', methods=['POST'])
 def predict():
     try:
@@ -22,6 +23,7 @@ def predict():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 400
+
 
 if __name__ == '__main__':
     app.run(debug=True)
