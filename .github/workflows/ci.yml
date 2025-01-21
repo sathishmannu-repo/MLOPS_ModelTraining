@@ -28,3 +28,6 @@ jobs:
 
     - name: Lint code
       run: flake8 "M1_CICD Pipeline/src/"
+
+    - name: Run Tests
+      run: pytest "M1_CICD Pipeline/tests/"
