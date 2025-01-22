@@ -7,7 +7,10 @@ on:
   pull_request:
     branches:
       - development
-
+      
+permissions:
+  contents: write
+  
 jobs:
   test:
     runs-on: ubuntu-latest
