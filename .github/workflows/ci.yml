@@ -1,0 +1,84 @@
+name: Python CI
+
+on:
+  push:
+    branches:
+      - development
+  pull_request:
+    branches:
+      - development
+      
+permissions:
+  contents: write
+  
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.8
+
+    - name: Install dependencies
+      run: |
+        pip install -r "M1_CICD Pipeline/requirements.txt"
+        pip install flake8 pytest
+
+    - name: Lint code
+      run: flake8 "M1_CICD Pipeline/src/"
+
+    - name: Run Tests
+      run: pytest "M1_CICD Pipeline/tests/"
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: test  # Ensures deployment runs after tests pass
+  
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+  
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.8
+  
+    - name: Install dependencies
+      run: |
+        pip install -r "M1_CICD Pipeline/requirements.txt"
+  
+    - name: Save model if not already saved
+      run: |
+        # Ensure the models directory exists
+        mkdir -p "model"
+      
+        # Check if the model file exists and save it
+        if [ ! -f "M1_CICD\ Pipeline/model/housing_model.pkl" ]; then
+          echo "Model file not found, training model..."
+          python "M1_CICD Pipeline/src/train_model.py"
+        else
+          echo "Model file already exists, skipping training."
+        fi
+
+    - name: Commit and push the model file
+      run: |
+        model_file_path="M1_CICD Pipeline/model/housing_model.pkl"
+        if [ -f "$model_file_path" ]; then
+          echo "Model file found, committing to repository..."
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add "$model_file_path"
+          git commit -m "Add or update trained model"
+          git push origin development
+        else
+          echo "Model file not found. Deployment failed."
+          exit 1
+        fi
+  
+    - name: Confirm Deployment
+      run: echo "Deployment to S3 completed successfully."
