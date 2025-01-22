@@ -34,8 +34,8 @@ mae = mean_absolute_error(y_test, predictions)
 rmse = math.sqrt(mse)
 r2 = r2_score(y_test, predictions)
 
-# Print evaluation results 
-print("Model trained successfully.") 
+# Print evaluation results
+print("Model trained successfully.")
 print(f"Mean Squared Error (MSE): {mse:.2f}")
 print(f"Mean Absolute Error (MAE): {mae:.2f}")
 print(f"Root Mean Squared Error (RMSE): {rmse:.2f}")
