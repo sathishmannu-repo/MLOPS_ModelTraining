@@ -18,7 +18,7 @@ y = data['PRICE']
 
 # Split the dataset into training and testing sets
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42
+    X, y, test_size=0.3, random_state=42
 )
 
 # Initialize and train the model
@@ -34,8 +34,9 @@ mae = mean_absolute_error(y_test, predictions)
 rmse = math.sqrt(mse)
 r2 = r2_score(y_test, predictions)
 
-# Print evaluation results
-print("Model trained successfully.")
+
+# Model trained evaluation results printed
+print("Model trained successfully.")  # No need for f-string here
 print(f"Mean Squared Error (MSE): {mse:.2f}")
 print(f"Mean Absolute Error (MAE): {mae:.2f}")
 print(f"Root Mean Squared Error (RMSE): {rmse:.2f}")
