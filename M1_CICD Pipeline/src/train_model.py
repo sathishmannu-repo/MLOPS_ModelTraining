@@ -34,6 +34,7 @@ mae = mean_absolute_error(y_test, predictions)
 rmse = math.sqrt(mse)
 r2 = r2_score(y_test, predictions)
 
+
 # Model trained evaluation results printed
 print("Model trained successfully.")  # No need for f-string here
 print(f"Mean Squared Error (MSE): {mse:.2f}")
