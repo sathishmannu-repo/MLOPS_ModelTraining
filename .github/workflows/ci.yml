@@ -69,7 +69,7 @@ jobs:
       run: |
         model_file_path="M1_CICD Pipeline/model/housing_model.pkl"
         if [ -f "$model_file_path" ]; then
-          echo "Model file found, committing to repository..."
+          echo "Model file found, committing to repository......."
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add "$model_file_path"
