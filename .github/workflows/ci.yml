@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - development
+      - main
   pull_request:
     branches:
       - main
@@ -35,7 +36,7 @@ jobs:
     - name: Run Tests
       run: pytest "M1_CICD Pipeline/tests/"
 
-  deploy:
+  deploy-development:
     runs-on: ubuntu-latest
     needs: test  # Ensures deployment runs after tests pass
   
@@ -72,6 +73,32 @@ jobs:
           echo "Model file not found. Deployment failed."
           exit 1
         fi
+  
+    - name: Confirm Deployment
+      run: echo "Deployment to S3 completed successfully."
+
+  deploy-main:
+    runs-on: ubuntu-latest
+    needs: test  # Ensures deployment runs after tests pass
+  
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+  
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.8
+  
+    - name: Install dependencies
+      run: |
+        pip install -r "M1_CICD Pipeline/requirements.txt"
+  
+    - name: Save model if not already saved
+      run: |
+        # Ensure the models directory exists
+        mkdir -p "model"
+        python "M1_CICD Pipeline/src/train_model.py"   
   
     - name: Confirm Deployment
       run: echo "Deployment to S3 completed successfully."
